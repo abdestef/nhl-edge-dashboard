@@ -53,7 +53,7 @@ footer{margin-top:28px;text-align:center;color:var(--muted);font-size:11px}
 <footer>NHL EDGE is an independent analytics and record-keeping tool, not a sportsbook. Odds are not automatically supplied in this version. Bet records are stored only in this browser on this device.</footer>
 </main>
 <script>
-const NHL='https://api-web.nhle.com/v1';let standings=[],games=[];
+const NHL='https://proxy.cors.dev/https://api-web.nhle.com/v1';let standings=[],games=[];
 const $=id=>document.getElementById(id),cash=n=>new Intl.NumberFormat('en-CA',{style:'currency',currency:'CAD'}).format(Number(n)||0);
 const safe=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function name(t){return [t?.placeName?.default,t?.commonName?.default].filter(Boolean).join(' ')||t?.teamName?.default||t?.name?.default||t?.abbrev||'Team'}
