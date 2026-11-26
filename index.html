@@ -138,4 +138,20 @@ $('betRows').addEventListener('click',e=>{const btn=e.target.closest('[data-del]
 $('export').addEventListener('click',()=>{const list=readBets();if(!list.length){alert('There are no bets to export yet.');return}const cols=['date','event','market','pick','odds','stake','book','result'];const csv=[cols.join(','),...list.map(b=>cols.map(k=>'"'+String(b[k]??'').replace(/"/g,'""')+'"').join(','))].join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='nhl-edge-bets.csv';a.click();URL.revokeObjectURL(a.href)});
 $('bDate').value=new Date().toLocaleDateString('en-CA');renderBets();load();setInterval(load,5*60*1000);
 </script>
+
+<script>
+// NHL EDGE navigation fallback: keeps tabs usable even if another dashboard script fails.
+document.querySelectorAll('.tab').forEach(function(button) {
+  button.addEventListener('click', function() {
+    var target = button.getAttribute('data-tab');
+    document.querySelectorAll('.tab').forEach(function(tab) {
+      tab.classList.toggle('active', tab === button);
+    });
+    ['overview', 'teams', 'matchup', 'props', 'bets'].forEach(function(id) {
+      var panel = document.getElementById(id);
+      if (panel) panel.classList.toggle('hidden', id !== target);
+    });
+  });
+});
+</script>
 </body></html>
